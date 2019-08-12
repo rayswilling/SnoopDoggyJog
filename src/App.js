@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Signup from './auth/SignIn';
+import Signup from './auth/SignUp';
+import SignIn from './auth/SignIn';
+
 import { PageSwitcher, PageSwitcherTitle } from './auth/PageSwitch';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className='App'>
-        <div className='App__Aside' />
+      <Router>
+        <div className='App'>
+          <div className='App__Aside' />
 
-        <div className='App__Form'>
-          <PageSwitcher />
-          <PageSwitcherTitle />
-          <Signup />
+          <div className='App__Form'>
+            <PageSwitcher />
+            <PageSwitcherTitle />
+
+            <Route exact path='/sign-up' component={Signup} />
+
+            <Route exact path='/sign-in' component={SignIn} />
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 import '../App.css';
 
 const PageSwitcher = () => {
   return (
     <div className='PageSwitcher'>
-      <a href='#' className='PageSwitcher__Item'>
+      <NavLink
+        to='/sign-in'
+        className='PageSwitcher__Item'
+        activeClassName='PageSwitcher__Item--Active'
+      >
         Sign In
-      </a>
-      <a href='#' className='PageSwitcher__Item PageSwitcher__Item--Active'>
+      </NavLink>
+      <NavLink
+        to='/sign-up'
+        className='PageSwitcher__Item'
+        activeClassName='PageSwitcher__Item--Active'
+      >
         Sign Up
-      </a>
+      </NavLink>
     </div>
   );
 };
@@ -18,13 +27,21 @@ const PageSwitcher = () => {
 const PageSwitcherTitle = () => {
   return (
     <div className='FormTitle'>
-      <a href='#' className='FormTitle__Link'>
+      <NavLink
+        to='/sign-in'
+        className='FormTitle__Link'
+        activeClassName='FormTitle__Link--Active'
+      >
         Sign In
-      </a>
+      </NavLink>
       or
-      <a href='#' className='FormTitle__Link FormTitle__Link--Active'>
+      <NavLink
+        to='/sign-up'
+        className='FormTitle__Link '
+        activeClassName='FormTitle__Link--Active'
+      >
         Sign Up
-      </a>
+      </NavLink>
     </div>
   );
 };
