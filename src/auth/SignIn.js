@@ -23,52 +23,81 @@ const Signup = () => {
 
     <form onSubmit={handleSubmit}>
       <div>
-        <label> First Name </label>
+        <label className='FormField__Label' htmlFor='name'>
+          First Name{' '}
+        </label>
         <input
           type='text'
           name='firstName'
           onChange={handleInputChange}
           value={inputs.firstName}
+          placeholder='Enter your first name'
+          className='FormField__Input'
           required
         />
-        <label>Last Name</label>
+        <br />
+        <br />
+
+        <label className='FormField__Label' htmlFor='name'>
+          Last Name
+        </label>
         <input
           type='text'
           name='lastName'
           onChange={handleInputChange}
           value={inputs.lastNate}
+          placeholder='Enter your last name'
+          className='FormField__Input'
           required
         />
       </div>
+      <br />
       <div>
-        <label>Email Address</label>
+        <label className='FormField__Label' htmlFor='name'>
+          Email Address
+        </label>
         <input
           type='email'
           name='email'
           onChange={handleInputChange}
           value={inputs.email}
+          placeholder='Enter your email address'
+          className='FormField__Input'
           required
         />
       </div>
+      <br />
       <div>
-        <label>Password</label>
+        <label className='FormField__Label' htmlFor='name'>
+          Password
+        </label>
         <input
           type='password'
           name='password1'
           onChange={handleInputChange}
           value={inputs.password1}
+          className='FormField__Input'
+          placeholder='Enter a password'
         />
       </div>
+      <br />
       <div>
-        <label>Re-enter Password</label>
+        <label className='FormField__Label' htmlFor='name'>
+          Re-enter Password
+        </label>
         <input
           type='password'
           name='password2'
           onchange={handleInputChange}
           value={inputs.password2}
+          className='FormField__Input'
+          placeholder='Re-enter your password'
         />
       </div>
-      <button type='submit'>Sign Up</button>
+      <br />
+      <button className='FormField__Button' type='submit'>
+        Sign Up
+      </button>
     </form>
   );
 };
