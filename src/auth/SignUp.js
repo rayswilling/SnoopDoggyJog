@@ -28,11 +28,16 @@ class SignUp extends Component {
   }
 
   handleSubmit(e) {
-    if (e) {
-      e.preventDefault();
+    e.preventDefault();
+    const { password1, password2, postcode } = this.state;
+    if (password1 !== password2) {
+      alert("Passwords don't match");
+    } else if (postcode.substring(0, 2) !== 'SW') {
+      alert('Postcode must be in South West London');
+    } else {
+      console.log('The form was submitted with the following data:');
+      console.log(this.state);
     }
-    console.log('The form was submitted with the following data:');
-    console.log(this.state);
   }
 
   render() {
