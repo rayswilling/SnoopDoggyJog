@@ -42,7 +42,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      // First, let’s add the handleSubmit function to the form‘s onSubmit attribute.
+      // First, let’s add the handleeeeeeSubmit function to the form‘s onSubmit attribute.
 
       <form onSubmit={this.handleSubmit}>
         <div>
