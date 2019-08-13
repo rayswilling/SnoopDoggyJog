@@ -18,7 +18,7 @@ class SignInForm extends Component {
 
   render() {
     return (
-      // First, let’s add the handleSubmit function to the form‘s onSubmit attribute.
+      // First, let’s add the handleSubmit functoon to the form‘s onSubmit attribute.
 
       <form onSubmit={this.handleSubmit}>
         <div>
