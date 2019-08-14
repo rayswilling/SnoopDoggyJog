@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import handleInputChange from '../Hooks/handleInputChange';
-import handleSubmit from '../Hooks/handleSubmit';
+// import handleSubmit from '../Hooks/handleSubmit';
 
 class SignInForm extends Component {
   constructor() {
@@ -13,7 +13,13 @@ class SignInForm extends Component {
     };
 
     this.handleInputChange = handleInputChange.bind(this);
-    this.handleSubmit = handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('The form was submitted with the following data:');
+    console.log(this.state);
   }
 
   render() {
@@ -22,12 +28,13 @@ class SignInForm extends Component {
 
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label className='FormField__Label' htmlFor='name'>
+          <label className='FormField__Label' htmlFor='email'>
             Email Address
           </label>
           <input
             type='email'
             id='email'
+            name='email'
             onChange={this.handleInputChange}
             value={this.state.email}
             placeholder='Enter your email address'
@@ -37,12 +44,13 @@ class SignInForm extends Component {
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='name'>
+          <label className='FormField__Label' htmlFor='password'>
             Password
           </label>
           <input
             type='password'
-            id='password1'
+            id='password'
+            name='password'
             onChange={this.handleInputChange}
             value={this.state.password}
             className='FormField__Input'

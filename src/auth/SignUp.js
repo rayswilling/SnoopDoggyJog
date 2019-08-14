@@ -8,11 +8,12 @@
 import React, { Component } from 'react';
 
 import handleInputChange from '../Hooks/handleInputChange';
+import Axios from 'axios';
 // import handleSubmit from '../Hooks/handleSubmit';
 
 class SignUp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       firstName: '',
@@ -20,7 +21,7 @@ class SignUp extends Component {
       email: '',
       password1: '',
       password2: '',
-      postcode: ''
+      postCode: ''
     };
 
     this.handleInputChange = handleInputChange.bind(this);
@@ -29,14 +30,34 @@ class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { password1, password2, postcode } = this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      password1,
+      password2,
+      postCode
+    } = this.state;
+
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password1,
+      password2,
+      postCode
+    };
+
     if (password1 !== password2) {
       alert("Passwords don't match");
-    } else if (postcode.substring(0, 2) !== 'SW') {
+    } else if (postCode.substring(0, 2) !== 'SW') {
       alert('Postcode must be in South West London');
     } else {
-      console.log('The form was submitted with the following data:');
-      console.log(this.state);
+      Axios.post('http://localhost:4000/user/signup', user)
+        .then(() => console.log('You have succesfully signed up!'))
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 
@@ -50,6 +71,9 @@ class SignUp extends Component {
             First Name
           </label>
           <input
+            ref={ref => {
+              this.firstName = ref;
+            }}
             type='text'
             id='firstname'
             name='firstName'
@@ -66,6 +90,9 @@ class SignUp extends Component {
             Last Name
           </label>
           <input
+            ref={ref => {
+              this.lastName = ref;
+            }}
             type='text'
             id='lastname'
             name='lastName'
@@ -82,6 +109,9 @@ class SignUp extends Component {
             Email Address
           </label>
           <input
+            ref={ref => {
+              this.email = ref;
+            }}
             type='email'
             id='email'
             name='email'
@@ -98,6 +128,9 @@ class SignUp extends Component {
             Password
           </label>
           <input
+            ref={ref => {
+              this.password = ref;
+            }}
             type='password'
             id='password1'
             name='password1'
@@ -113,6 +146,9 @@ class SignUp extends Component {
             Re-enter Password
           </label>
           <input
+            ref={ref => {
+              this.password2 = ref;
+            }}
             type='password'
             id='password2'
             name='password2'
@@ -124,15 +160,18 @@ class SignUp extends Component {
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='postcode'>
+          <label className='FormField__Label' htmlFor='postCode'>
             Post Code
           </label>
           <input
+            ref={ref => {
+              this.postCode = ref;
+            }}
             type='text'
-            id='postcode'
-            name='postcode'
+            id='postCode'
+            name='postCode'
             onChange={this.handleInputChange}
-            value={this.state.postcode}
+            value={this.state.postCode}
             placeholder='Enter your post code'
             className='FormField__Input'
             required
