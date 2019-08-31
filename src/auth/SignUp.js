@@ -9,6 +9,8 @@ import React, { Component } from 'react';
 
 import handleInputChange from '../Hooks/handleInputChange';
 import Axios from 'axios';
+
+import { db } from '../App';
 // import handleSubmit from '../Hooks/handleSubmit';
 
 class SignUp extends Component {
@@ -21,7 +23,7 @@ class SignUp extends Component {
       email: '',
       password1: '',
       password2: '',
-      postCode: ''
+      postCode: '',
     };
 
     this.handleInputChange = handleInputChange.bind(this);
@@ -36,7 +38,7 @@ class SignUp extends Component {
       email,
       password1,
       password2,
-      postCode
+      postCode,
     } = this.state;
 
     const user = {
@@ -45,7 +47,7 @@ class SignUp extends Component {
       email,
       password1,
       password2,
-      postCode
+      postCode,
     };
 
     if (password1 !== password2) {
@@ -53,11 +55,7 @@ class SignUp extends Component {
     } else if (postCode.substring(0, 2) !== 'SW') {
       alert('Postcode must be in South West London');
     } else {
-      Axios.post('http://localhost:4000/user/signup', user)
-        .then(() => console.log('You have succesfully signed up!'))
-        .catch(err => {
-          console.error(err);
-        });
+      db.collection('user').add(user);
     }
   }
 
@@ -67,118 +65,118 @@ class SignUp extends Component {
 
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label className='FormField__Label' htmlFor='firstname'>
+          <label className="FormField__Label" htmlFor="firstname">
             First Name
           </label>
           <input
             ref={ref => {
               this.firstName = ref;
             }}
-            type='text'
-            id='firstname'
-            name='firstName'
+            type="text"
+            id="firstname"
+            name="firstName"
             onChange={this.handleInputChange}
             value={this.state.firstName}
-            placeholder='Enter your first name'
-            className='FormField__Input'
+            placeholder="Enter your first name"
+            className="FormField__Input"
             required
           />
           <br />
           <br />
 
-          <label className='FormField__Label' htmlFor='lastname'>
+          <label className="FormField__Label" htmlFor="lastname">
             Last Name
           </label>
           <input
             ref={ref => {
               this.lastName = ref;
             }}
-            type='text'
-            id='lastname'
-            name='lastName'
+            type="text"
+            id="lastname"
+            name="lastName"
             onChange={this.handleInputChange}
             value={this.state.lastName}
-            placeholder='Enter your last name'
-            className='FormField__Input'
+            placeholder="Enter your last name"
+            className="FormField__Input"
             required
           />
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='email'>
+          <label className="FormField__Label" htmlFor="email">
             Email Address
           </label>
           <input
             ref={ref => {
               this.email = ref;
             }}
-            type='email'
-            id='email'
-            name='email'
+            type="email"
+            id="email"
+            name="email"
             onChange={this.handleInputChange}
             value={this.state.email}
-            placeholder='Enter your email address'
-            className='FormField__Input'
+            placeholder="Enter your email address"
+            className="FormField__Input"
             required
           />
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='password'>
+          <label className="FormField__Label" htmlFor="password">
             Password
           </label>
           <input
             ref={ref => {
               this.password = ref;
             }}
-            type='password'
-            id='password1'
-            name='password1'
+            type="password"
+            id="password1"
+            name="password1"
             onChange={this.handleInputChange}
             value={this.state.password1}
-            className='FormField__Input'
-            placeholder='Enter a password'
+            className="FormField__Input"
+            placeholder="Enter a password"
           />
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='password2'>
+          <label className="FormField__Label" htmlFor="password2">
             Re-enter Password
           </label>
           <input
             ref={ref => {
               this.password2 = ref;
             }}
-            type='password'
-            id='password2'
-            name='password2'
+            type="password"
+            id="password2"
+            name="password2"
             onChange={this.handleInputChange}
             value={this.state.password2}
-            className='FormField__Input'
-            placeholder='Re-enter your password'
+            className="FormField__Input"
+            placeholder="Re-enter your password"
           />
         </div>
         <br />
         <div>
-          <label className='FormField__Label' htmlFor='postCode'>
+          <label className="FormField__Label" htmlFor="postCode">
             Post Code
           </label>
           <input
             ref={ref => {
               this.postCode = ref;
             }}
-            type='text'
-            id='postCode'
-            name='postCode'
+            type="text"
+            id="postCode"
+            name="postCode"
             onChange={this.handleInputChange}
             value={this.state.postCode}
-            placeholder='Enter your post code'
-            className='FormField__Input'
+            placeholder="Enter your post code"
+            className="FormField__Input"
             required
           />
         </div>
         <br />
-        <button className='FormField__Button' type='submit'>
+        <button className="FormField__Button" type="submit">
           Sign Up
         </button>
       </form>
