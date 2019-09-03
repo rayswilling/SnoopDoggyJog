@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 
-import handleInputChange from '../Hooks/handleInputChange';
+import handleInputChange from '../handlers/handleInputChange';
 
 import firebase from '@firebase/app';
 require('firebase/auth');
@@ -50,6 +50,13 @@ class SignUp extends Component {
       password2,
       postCode,
     };
+
+    const signedInUser = firebase.auth().currentUser;
+    if (signedInUser) {
+      console.log('user logged in:', signedInUser);
+    } else {
+      console.log('user logged out');
+    }
 
     if (email.length < 4) {
       alert('Please enter an email address.');
