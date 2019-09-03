@@ -8,9 +8,10 @@
 import React, { Component } from 'react';
 
 import handleInputChange from '../Hooks/handleInputChange';
-import Axios from 'axios';
 
-import { db } from '../App';
+import firebase from '@firebase/app';
+require('firebase/auth');
+
 // import handleSubmit from '../Hooks/handleSubmit';
 
 class SignUp extends Component {
@@ -27,10 +28,10 @@ class SignUp extends Component {
     };
 
     this.handleInputChange = handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSignUp(e) {
     e.preventDefault();
     const {
       firstName,
@@ -50,20 +51,40 @@ class SignUp extends Component {
       postCode,
     };
 
+    if (email.length < 4) {
+      alert('Please enter an email address.');
+      return;
+    }
+    if (password1.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
     if (password1 !== password2) {
       alert("Passwords don't match");
     } else if (postCode.substring(0, 2) !== 'SW') {
       alert('Postcode must be in South West London');
     } else {
-      db.collection('user').add(user);
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password1)
+        .then(cred => {
+          console.log(cred);
+        });
+      firebase
+        .firestore()
+        .collection('user')
+        .add({ user })
+        .then(cred => {
+          console.log('ADDED TO USERS COLLECTION!');
+        });
     }
   }
 
   render() {
     return (
-      // First, let’s add the handleeeeeeSubmit function to the form‘s onSubmit attribute.
+      // First, let’s add the handleSubmit function to the form‘s onSubmit attribute.
 
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSignUp}>
         <div>
           <label className="FormField__Label" htmlFor="firstname">
             First Name
