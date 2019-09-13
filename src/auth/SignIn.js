@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import handleInputChange from '../handlers/handleInputChange';
 import firebase from '@firebase/app';
@@ -75,7 +76,10 @@ class SignInForm extends Component {
           />
         </div>
         <br />
-        <button className="FormField__Button" type="submit">
+        <button
+          className="FormField__Button"
+          type="submit"
+        >
           Sign In
         </button>
         <br />

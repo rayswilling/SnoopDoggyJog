@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import handleInputChange from '../Hooks/handleInputChange';
+import handleInputChange from '../handlers/handleInputChange';
 import Axios from 'axios';
 
 import { db } from '../App';
@@ -101,4 +101,4 @@ class CreatePet extends Component {
     );
   }
 }
-export default SignUp;
+export default CreatePet;

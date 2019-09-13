@@ -7,12 +7,12 @@
 
 import React, { Component } from 'react';
 
+// import handleSubmit from '../handle/handleSubmit';
+
 import handleInputChange from '../handlers/handleInputChange';
 
 import firebase from '@firebase/app';
 require('firebase/auth');
-
-// import handleSubmit from '../Hooks/handleSubmit';
 
 class SignUp extends Component {
   constructor(props) {

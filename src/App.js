@@ -27,18 +27,30 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log('user logged in: ', user);
-  } else {
-    console.log('user logged out');
-  }
-});
-
-// make auth and firestore references
 export const db = firebase.firestore();
 export const auth = firebase.auth();
+
+// db.collection('test')
+//   .get()
+//   .then(snapshot => {
+//     snapshot.forEach(doc => {
+//       console.log(doc.id, doc.data());
+//     });
+//   });
+
+// const signedInUser = firebase
+//   .auth()
+//   .onAuthStateChanged(function(user) {
+//     if (user) {
+//       console.log('user logged in: ', user);
+//       true;
+//     } else {
+//       console.log('user logged out');
+//       false;
+//     }
+//   });
+
+// make auth and firestore references
 
 // db.collection("test").add({
 //   name: "Ray",
@@ -53,7 +65,8 @@ export const auth = firebase.auth();
 //   console.error(error);
 // });
 
-db.collection('test')
+const userID = db
+  .collection('user')
   .get()
   .then(snapshot => {
     snapshot.forEach(doc => {
@@ -80,9 +93,13 @@ class App extends Component {
 
             <Route exact path="/sign-up" component={Signup} />
 
-            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-in" component={SignIn} default />
 
-            <Route exact path="/profile" component={ProfilePage} />
+            <Route
+              exact
+              path="/profile(/:userID)"
+              component={ProfilePage}
+            />
           </div>
         </div>
       </Router>
